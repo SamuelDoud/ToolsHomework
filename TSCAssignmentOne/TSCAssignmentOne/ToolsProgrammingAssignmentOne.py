@@ -23,10 +23,12 @@ def EulerPiThreaded(NumberOfThreads, depth, digitsPrecision):
     base = Decimal(0)
     currentIndex = 1
     currentThread = EulerPiThread(0,currentIndex, firstLength)
+    currentIndex = currentIndex + firstLength
     currentThread.start()
     threads.append(currentThread)
     for thread in range(1, NumberOfThreads):
-        currentThread = EulerPiThread(thread, thread * length + 1, length)
+        currentThread = EulerPiThread(thread, currentIndex, length)
+        currentIndex = currentIndex + length
         currentThread.start()
         threads.append(currentThread)
     for thread in threads:#wait for all the threads to complete, then add their calculations to the base
